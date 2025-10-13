@@ -1,4 +1,4 @@
-
+pip i
 import random
 
 def escolher_palavra():
@@ -46,4 +46,4 @@ def jogar_forca():
         print("\n💀 Fim de jogo! A palavra era:", palavra)
 
 if __name__ == "__main__":
-    jogar_forca()
+    jogar_forca(
