@@ -1,4 +1,3 @@
-pip i
 import random
 
 def escolher_palavra():
