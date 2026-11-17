@@ -1,18 +1,18 @@
-import random
-def jogar():
-    print("Bem-vindo ao jogo de Cara ou Coroa!")
-    escolha_usuario = input("Escolha 'cara' ou 'coroa': ").strip().lower()
+"""Entrada histórica, sem efeitos colaterais ao importar."""
 
-    if escolha_usuario not in ['cara', 'coroa']:
-        print("Escolha inválida. Tente novamnete.")
-        return
-    resultado = random.choice(['cara', 'coroa'])
-    print(f"O resultado foi: {resultado}")
+from habilidades.cli import main
 
-    if escolha_usuario == resultado:
-        print("Você acertou!!")
-    else:
-        print("Você errou...")
 
-#executar o jogo
-jogar()
+def jogar() -> None:
+    try:
+        choice = input("Escolha 'cara' ou 'coroa': ").strip().lower()
+        if choice not in {"cara", "coroa"}:
+            print("Escolha inválida. Use cara ou coroa.")
+            return
+        main(["moeda", "--escolha", choice])
+    except (EOFError, KeyboardInterrupt):
+        print("\nPartida encerrada.")
+
+
+if __name__ == "__main__":
+    jogar()

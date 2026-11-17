@@ -1,21 +1,22 @@
-import random
+"""Entrada histórica: dois dados de seis faces."""
 
-def jogar_dados():
-    dado1 = random.randint(1,6)
-    dado2 = random.randint(1,6)
+from habilidades.cli import main as cli_main
 
-    print(f"Você lançou os dados!")
-    print(f"Dado 1: {dado1}")
-    print(f"Dado 2: {dado2}")
-    print(f"Soma dos dados: {dado1 + dado2}")
 
-def main():
-    while True:
-        input("Pressione Enter para lançar os dados...")
-        jogar_dados()
-        continuar = input("Deseja jogar novamente? (s/n): ").lower()
-        if continuar != 's':
-            print("Obrigado por Jogar!")
-            break
+def jogar_dados() -> None:
+    cli_main(["dados"])
+
+
+def main() -> None:
+    try:
+        while True:
+            input("Pressione Enter para lançar os dados…")
+            jogar_dados()
+            if input("Jogar novamente? (s/n): ").strip().lower() != "s":
+                break
+    except (EOFError, KeyboardInterrupt):
+        print("\nPartida encerrada.")
+
+
 if __name__ == "__main__":
     main()
