@@ -1,38 +1,33 @@
+"""Entrada histórica: execute com uv run python calculadora2.py."""
 
-def somar(a, b):
-    return a + b
+from habilidades.calculator import calculate
 
-def subtrair(a, b):
-    return a - b
 
-def multiplicar(a, b):
-    return a * b
+def somar(a: float, b: float) -> float:
+    return calculate(a, b, "+")
 
-def dividir(a, b):
-    if b == 0:
-        return "Erro: divisão por zero"
-    return a / b
 
-def main():
-    print("Calculadora Simples")
-    print("Operações disponíveis: +, -, *, /")
+def subtrair(a: float, b: float) -> float:
+    return calculate(a, b, "-")
 
-    operacao = input("Escolha a operação (+ - * /): ")
-    a = float(input("Digite o primeiro número: "))
-    b = float(input("Digite o segundo número: "))
 
-    if operacao == '+':
-        resultado = somar(a,b)
-    elif operacao == '-':
-        resultado = subtrair(a,b)
-    elif operacao == '*':
-        resultado = multiplicar(a,b)
-    elif operacao == '/':
-        resultado = dividir(a,b)
-    else:
-        resultado = "Operação inválida"
+def multiplicar(a: float, b: float) -> float:
+    return calculate(a, b, "*")
 
-    print(f"Resultado: {resultado}")
+
+def dividir(a: float, b: float) -> float:
+    return calculate(a, b, "/")
+
+
+def main() -> None:
+    try:
+        operation = input("Escolha a operação (+ - * /): ").strip()
+        a = float(input("Primeiro número: ").replace(",", "."))
+        b = float(input("Segundo número: ").replace(",", "."))
+        print(f"Resultado: {calculate(a, b, operation):g}")
+    except (ValueError, EOFError, KeyboardInterrupt) as error:
+        print(f"Operação encerrada: {error}")
+
 
 if __name__ == "__main__":
     main()

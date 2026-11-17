@@ -1,48 +1,10 @@
-import random
+"""Entrada histórica da forca; regras e interface ficam no pacote habilidades."""
 
-def escolher_palavra():
-    palavras = ['python', 'programa', 'desenvolvedor', 'computador', 'algoritmo']
-    return random.choice(palavras).lower()
+from habilidades.cli import main
+from habilidades.cli import play_hangman as jogar_forca
+from habilidades.games import choose_word as escolher_palavra
 
-def jogar_forca():
-    palavra = escolher_palavra()
-    letras_descobertas = ['_' for _ in palavra]
-    letras_usadas = set()
-    tentativas = 6
-
-    print("🎮 Bem-vindo ao Jogo da Forca!")
-    print("A palavra tem", len(palavra), "letras.")
-
-    while tentativas > 0 and '_' in letras_descobertas:
-        print("\nPalavra:", ' '.join(letras_descobertas))
-        print("Letras usadas:", ', '.join(sorted(letras_usadas)))
-        print("Tentativas restantes:", tentativas)
-
-        letra = input("Digite uma letra: ").lower()
-
-        if not letra.isalpha() or len(letra) != 1:
-            print("Digite apenas uma letra válida.")
-            continue
-
-        if letra in letras_usadas:
-            print("Você já tentou essa letra.")
-            continue
-
-        letras_usadas.add(letra)
-
-        if letra in palavra:
-            for i, l in enumerate(palavra):
-                if l == letra:
-                    letras_descobertas[i] = letra
-            print("✅ Boa! A letra está na palavra.")
-        else:
-            tentativas -= 1
-            print("❌ Ops! A letra não está na palavra.")
-
-    if '_' not in letras_descobertas:
-        print("\n🎉 Parabéns! Você descobriu a palavra:", palavra)
-    else:
-        print("\n💀 Fim de jogo! A palavra era:", palavra)
+__all__ = ["escolher_palavra", "jogar_forca"]
 
 if __name__ == "__main__":
-    jogar_forca(
+    raise SystemExit(main(["forca"]))

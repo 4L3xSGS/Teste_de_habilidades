@@ -1,17 +1,21 @@
-import random
-import string
+"""Compatibilidade com a função gerar_senha; geração segura no pacote habilidades."""
 
-def gerar_senha(tamanho=12, usar_maiusculas=True, usar_numeros=True, usar_simbolos=True):
-    caracteres = string.ascii_lowercase
-    if usar_maiusculas:
-        caracteres += string.ascii_uppercase
-    if usar_numeros:
-        caracteres += string.digits
-    if usar_simbolos:
-        caracteres += string.punctuation
+from habilidades.passwords import generate_password
 
-    senha = ''.join(random.choice(caracteres)for _ in range(tamanho))
-    return senha
 
-# Exemplo de uso
-print("Senha gerada:", gerar_senha(tamanho=16))
+def gerar_senha(
+    tamanho: int = 12,
+    usar_maiusculas: bool = True,
+    usar_numeros: bool = True,
+    usar_simbolos: bool = True,
+) -> str:
+    return generate_password(
+        tamanho,
+        uppercase=usar_maiusculas,
+        digits=usar_numeros,
+        symbols=usar_simbolos,
+    )
+
+
+if __name__ == "__main__":
+    print(gerar_senha(tamanho=16))

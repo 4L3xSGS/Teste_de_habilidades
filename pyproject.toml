@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "habilidades-lab"
+version = "1.0.0"
+description = "Laboratório Python de Alexander Souto: fundamentos, CLI e engenharia de software."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Alexander Souto" }]
+keywords = ["python", "portfolio", "cli", "learning"]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/4L3xSGS/Teste_de_habilidades"
+Issues = "https://github.com/4L3xSGS/Teste_de_habilidades/issues"
+
+[project.scripts]
+habilidades = "habilidades.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-cov>=6", "ruff>=0.11", "mypy>=1.15"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/habilidades"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S311"]
+"src/habilidades/games.py" = ["S311"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --cov=habilidades --cov-branch --cov-report=term-missing --cov-fail-under=90"
+
+[tool.coverage.run]
+source = ["habilidades"]
+branch = true
+
+[tool.coverage.report]
+exclude_also = ["if __name__ == .__main__.:"]
